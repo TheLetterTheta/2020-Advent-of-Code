@@ -35,7 +35,7 @@ fn find_three() {
         let max: u32 = 2020 - first;
         
         let mut needed = HashSet::new();
-        for &second in sorted_tree.range((Excluded(0), Included(max))) {
+        for &second in sorted_tree.range((Excluded(0), Excluded(max))) {
             let third = max - second;
             if needed.contains(&third) {
                 eprintln!("{0} + {1} + {2} = 2020;\n{0} * {1} * {2} = {3}", first, second, third, first * second * third);
