@@ -11,16 +11,18 @@ pub struct PasswordValidator {
 #[aoc_generator(day2)]
 pub fn input_generator(input: &str) -> Vec<PasswordValidator> {
 
-    let pattern = Regex::new(r"^(\d+)-(\d+) (\w): (\w+)$").unwrap();
+    lazy_static! {
+        static ref PATTERN: Regex = Regex::new(r"^(\d+)-(\d+) (\w): (\w+)$").unwrap();
+    }
 
     input.lines().map(|l| {
-        let captures = pattern.captures(l).unwrap();
+        let captures = PATTERN.captures(l).unwrap();
 
         PasswordValidator {
-            first: captures.get(1).unwrap().as_str().parse().unwrap(),
-            second: captures.get(2).unwrap().as_str().parse().unwrap(),
-            character: captures.get(3).unwrap().as_str().chars().nth(0).unwrap(),
-            password: captures.get(4).unwrap().as_str().into()
+            first: captures[1].parse().unwrap(),
+            second: captures[2].parse().unwrap(),
+            character: captures[3].chars().nth(0).unwrap(),
+            password: captures[4].into()
         }
     })
     .collect()
