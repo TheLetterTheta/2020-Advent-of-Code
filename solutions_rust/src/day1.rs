@@ -1,10 +1,10 @@
 use aoc_runner_derive::{aoc, aoc_generator};
-use std::collections::{HashSet, BTreeSet};
-use std::ops::Bound::{Excluded};
+use std::collections::{BTreeSet, HashSet};
+use std::ops::Bound::Excluded;
 
 #[aoc_generator(day1)]
 pub fn input_generator(input: &str) -> Vec<u16> {
-    input.lines().map(|l| l.parse::<u16>().unwrap() ).collect()
+    input.lines().map(|l| l.parse::<u16>().unwrap()).collect()
 }
 
 #[aoc(day1, part1)]
@@ -30,7 +30,7 @@ pub fn find_three(input: &[u16]) -> u32 {
 
     for &first in input.iter() {
         let max: u16 = 2020 - first;
-        
+
         let mut needed = HashSet::new();
         for &second in sorted_tree.range((Excluded(0), Excluded(max))) {
             let third = max - second;
